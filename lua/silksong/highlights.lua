@@ -1,50 +1,53 @@
 local c = require("silksong.colors")
 local cfg = vim.g.silksong_config
 local util = require("silksong.util")
-local set_hl = vim.api.nvim_set_hl
 local M = {}
 local hl = { langs = {}, plugins = {} }
 
-local function _apply_fmt(spec)
-	if not spec or not spec.fmt then
-		return spec
-	end
-	local out = vim.tbl_extend("force", {}, spec)
-	local fmt = out.fmt
-	out.fmt = nil
-	local function setflag(k)
-		if k == "bold" then
-			out.bold = true
-		elseif k == "italic" then
-			out.italic = true
-		elseif k == "underline" then
-			out.underline = true
-		elseif k == "strikethrough" then
-			out.strikethrough = true
-		elseif k == "reverse" then
-			out.reverse = true
-		elseif k == "nocombine" then
-			out.nocombine = true
-		end
-	end
+local _nvim_set_hl = vim.api.nvim_set_hl
 
-	if type(fmt) == "string" then
-		for _, flag in ipairs(vim.split(fmt, ",")) do
-			setflag((flag:gsub("^%s*(.-)%s*$", "%1")))
+local function set_hl(ns, name, spec)
+	if spec and spec.fmt ~= nil then
+		local fmt = spec.fmt
+		spec = vim.tbl_extend("force", {}, spec)
+		spec.fmt = nil
+
+		local function flag(s)
+			if s == "bold" then
+				spec.bold = true
+			elseif s == "italic" then
+				spec.italic = true
+			elseif s == "underline" then
+				spec.underline = true
+			elseif s == "undercurl" then
+				spec.undercurl = true
+			elseif s == "strikethrough" then
+				spec.strikethrough = true
+			elseif s == "reverse" then
+				spec.reverse = true
+			elseif s == "nocombine" then
+				spec.nocombine = true
+			end
 		end
-	elseif type(fmt) == "table" then
-		for k, v in pairs(fmt) do
-			if v then
-				setflag(k)
+
+		if type(fmt) == "string" then
+			for part in fmt:gmatch("[^,%s]+") do
+				flag(part)
+			end
+		elseif type(fmt) == "table" then
+			for k, v in pairs(fmt) do
+				if v then
+					flag(k)
+				end
 			end
 		end
 	end
-	return out
+	return _nvim_set_hl(ns, name, spec)
 end
 
 local function vim_highlights(highlights)
 	for group_name, group_settings in pairs(highlights) do
-		set_hl(0, group_name, _apply_fmt(group_settings))
+		set_hl(0, group_name, group_settings)
 	end
 end
 
