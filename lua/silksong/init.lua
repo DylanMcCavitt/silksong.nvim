@@ -94,6 +94,11 @@ function M.setup(opts)
 		if opts.toggle_style_list then -- this table cannot be extended, it has to be replaced
 			M.set_options("toggle_style_list", opts.toggle_style_list)
 		end
+		if opts.code_style then
+			local cfg = vim.g.silksong_config
+			cfg.code_style = vim.tbl_extend("force", cfg.code_style, opts.code_style)
+			vim.g.silksong_config = cfg
+		end
 	end
 	if vim.g.silksong_config.toggle_style_key then
 		vim.api.nvim_set_keymap(
@@ -106,7 +111,7 @@ function M.setup(opts)
 end
 
 function M.load()
-	vim.api.nvim_command("colorscheme silksong")
+	vim.cmd.colorscheme("bamboo")
 end
 
 return M
