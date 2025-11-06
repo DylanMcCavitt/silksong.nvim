@@ -256,7 +256,7 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
 		["@danger"] = colors.Fg,
 		["@type"] = colors.Yellow,
 		["@type.builtin"] = colors.Orange,
-		["@variable"] = { fg = c.fg, fmt = cfg.code_style.variables },
+		["@variable"] = { fg = c.purple, fmt = cfg.code_style.variables },
 		["@variable.builtin"] = { fg = c.red, fmt = cfg.code_style.variables },
 		["@variable.member"] = colors.Cyan,
 		["@variable.parameter"] = colors.Red,
