@@ -59,7 +59,7 @@ hl.common = {
 	Conceal = { fg = c.grey, bg = c.bg1 },
 	Added = colors.Green,
 	Removed = colors.Red,
-	Changed = colors.blue,
+	Changed = colors.Blue,
 	DiffAdd = { fg = c.none, bg = c.diff_add },
 	DiffChange = { fg = c.none, bg = c.diff_change },
 	DiffDelete = { fg = c.none, bg = c.diff_delete },
@@ -989,7 +989,7 @@ function M.setup()
 		return prefix .. "=" .. color_name
 	end
 
-	for group_name, group_settings in pairs(vim.g.onedark_config.highlights) do
+	for group_name, group_settings in pairs(vim.g.silksong_config.highlights) do
 		vim.api.nvim_command(
 			string.format(
 				"highlight %s %s %s %s %s",

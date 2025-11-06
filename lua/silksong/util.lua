@@ -4,7 +4,7 @@ util.bg = "#000000"
 util.fg = "#ffffff"
 
 local function hexToRgb(hex_str)
-	local r, g, b = string.match(hex_str, "^#(%x%x)(%x%x)(%x%x")
+	local r, g, b = string.match(hex_str, "^#(%x%x)(%x%x)(%x%x)$")
 	assert(r, "Invalid hex string: " .. hex_str)
 	return { tonumber(r, 16), tonumber(g, 16), tonumber(b, 16) }
 end

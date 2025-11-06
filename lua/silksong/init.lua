@@ -111,7 +111,7 @@ function M.setup(opts)
 end
 
 function M.load()
-	vim.cmd.colorscheme("bamboo")
+	vim.cmd.colorscheme("silksong")
 end
 
 return M
