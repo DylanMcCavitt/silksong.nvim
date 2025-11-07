@@ -388,8 +388,8 @@ else
 		TSDanger = colors.Fg,
 		TSType = colors.Yellow,
 		TSTypeBuiltin = colors.Orange,
-		TSVariable = { fg = c.fg, fmt = cfg.code_style.variables },
-		TSVariableBuiltin = { fg = c.red, fmt = cfg.code_style.variables },
+		TSVariable = { fg = c.purple, fmt = cfg.code_style.variables },
+		TSVariableBuiltin = { fg = c.blue, fmt = cfg.code_style.variables },
 	}
 end
 
