@@ -238,7 +238,7 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
 		["@none"] = colors.Fg,
 		["@number"] = colors.Orange,
 		["@number.float"] = colors.Orange,
-		["@operator"] = colors.Fg,
+		["@operator"] = colors.Purple,
 		["@parameter.reference"] = colors.Fg,
 		["@property"] = colors.Cyan,
 		["@punctuation.delimiter"] = colors.LightGrey,
