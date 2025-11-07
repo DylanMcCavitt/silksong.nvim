@@ -8,7 +8,7 @@ function M.setup()
 	end
 	vim.g.terminal_color_0 = c.black
 	vim.g.terminal_color_1 = c.red
-	vim.g.terminal_color_2 = c.green
+	vim.g.terminal_color_2 = c.dark_red
 	vim.g.terminal_color_3 = c.yellow
 	vim.g.terminal_color_4 = c.blue
 	vim.g.terminal_color_5 = c.purple
