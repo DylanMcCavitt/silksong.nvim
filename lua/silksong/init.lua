@@ -27,6 +27,15 @@ function M.colorscheme()
 	end
 	require("silksong.highlights").setup()
 	require("silksong.terminal").setup()
+	pcall(function()
+		local buf = vim.api.nvim_get_current_buf()
+		if vim.bo[buf].filetype == "javascript" then
+			local active = vim.treesitter.highlighter.active
+			if not (active and active[buf]) then
+				vim.treesitter.start(buf, "javascript")
+			end
+		end
+	end)
 end
 
 ---Toggle between silksong styles
@@ -112,6 +121,20 @@ end
 
 function M.load()
 	vim.cmd.colorscheme("silksong")
+end
+
+do
+	local grp = vim.api.nvim_create_augroup("SilksongJSAttach", { clear = true })
+	vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
+		group = grp,
+		pattern = { "javascript" },
+		callback = function(args)
+			local active = vim.treesitter.highlighter.active
+			if not (active and active[args.buf]) then
+				pcall(vim.treesitter.start, args.buf, "javascript")
+			end
+		end,
+	})
 end
 
 return M

@@ -6,6 +6,13 @@ local hl = { langs = {}, plugins = {} }
 
 local _nvim_set_hl = vim.api.nvim_set_hl
 
+local function copy_spec(spec)
+	if not spec then
+		return nil
+	end
+	return vim.deepcopy(spec)
+end
+
 local function set_hl(ns, name, spec)
 	if spec and spec.fmt ~= nil then
 		local fmt = spec.fmt
@@ -239,7 +246,7 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
 		["@number"] = colors.Orange,
 		["@number.float"] = colors.Orange,
 		["@operator"] = colors.Purple,
-		["@parameter.reference"] = colors.Fg,
+		["@parameter.reference"] = colors.Yellow,
 		["@property"] = colors.Cyan,
 		["@punctuation.delimiter"] = colors.LightGrey,
 		["@punctuation.bracket"] = colors.LightGrey,
@@ -328,6 +335,98 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
 			["@lsp.typemod.variable.injected"] = hl.treesitter["@variable"],
 			["@lsp.typemod.variable.static"] = hl.treesitter["@constant"],
 		}
+
+		local function ensure_semantic_link(group, capture)
+			if hl.lsp[group] then
+				return
+			end
+			local spec = hl.treesitter[capture] or hl.syntax[capture]
+			if spec then
+				hl.lsp[group] = copy_spec(spec)
+			end
+		end
+
+		local semantic_links = {
+			["@lsp.type.boolean"] = "@boolean",
+			["@lsp.type.class"] = "@type",
+			["@lsp.type.decorator"] = "@attribute",
+			["@lsp.type.event"] = "@function",
+			["@lsp.type.function"] = "@function",
+			["@lsp.type.modifier"] = "@keyword",
+			["@lsp.type.operator"] = "@operator",
+			["@lsp.type.regexp"] = "@string.regex",
+			["@lsp.type.string"] = "@string",
+			["@lsp.type.struct"] = "@type",
+			["@lsp.type.type"] = "@type",
+		}
+
+		for group, capture in pairs(semantic_links) do
+			ensure_semantic_link(group, capture)
+		end
+
+		local constant_like_types = {
+			enumMember = true,
+			parameter = true,
+			property = true,
+			variable = true,
+		}
+		local typemod_types = {
+			"class",
+			"decorator",
+			"enum",
+			"enumMember",
+			"event",
+			"function",
+			"macro",
+			"method",
+			"namespace",
+			"number",
+			"operator",
+			"parameter",
+			"property",
+			"struct",
+			"string",
+			"type",
+			"typeParameter",
+			"variable",
+		}
+		local typemod_mods = {
+			"abstract",
+			"async",
+			"declaration",
+			"defaultLibrary",
+			"definition",
+			"deprecated",
+			"documentation",
+			"modification",
+			"readonly",
+			"static",
+		}
+
+		local comment_spec = hl.treesitter["@comment"] or hl.syntax.Comment
+		local constant_spec = hl.treesitter["@constant"] or hl.syntax.Constant
+
+		for _, type_name in ipairs(typemod_types) do
+			local base = hl.lsp["@lsp.type." .. type_name]
+			if base then
+				for _, mod in ipairs(typemod_mods) do
+					local group = "@lsp.typemod." .. type_name .. "." .. mod
+					if not hl.lsp[group] then
+						local spec = base
+						if mod == "documentation" and comment_spec then
+							spec = comment_spec
+						elseif
+							(mod == "readonly" or mod == "static")
+							and constant_like_types[type_name]
+							and constant_spec
+						then
+							spec = constant_spec
+						end
+						hl.lsp[group] = copy_spec(spec)
+					end
+				end
+			end
+		end
 	end
 else
 	hl.treesitter = {
@@ -359,7 +458,7 @@ else
 		TSNumber = colors.Orange,
 		TSOperator = colors.Fg,
 		TSParameter = colors.Orange,
-		TSParameterReference = colors.Fg,
+		TSParameterReference = colors.Yellow,
 		TSProperty = colors.Cyan,
 		TSPunctDelimiter = colors.LightGrey,
 		TSPunctBracket = colors.LightGrey,
@@ -858,16 +957,6 @@ hl.langs.cpp = {
 	cppTSOperator = colors.Purple,
 }
 
-hl.langs.javascript = {
-	["@variable.javascript"] = hl.treesitter["@variable"],
-	["@variable.parameter.javascript"] = hl.treesitter["@variable.parameter"],
-	["@variable.member.javascript"] = hl.treesitter["@variable.parameter"],
-	["@property.javascript"] = hl.treesitter["@property"],
-	["@field.javascript"] = hl.treesitter["@field"],
-	["@function.call.javascript"] = hl.treesitter["@function.call"],
-	["@function.method.javascript"] = hl.treesitter["@function.method"],
-}
-
 hl.langs.markdown = {
 	markdownBlockquote = colors.Grey,
 	markdownBold = { fg = c.none, fmt = "bold" },
@@ -943,23 +1032,6 @@ hl.langs.tex = {
 	texCmdPart = colors.Blue,
 	texCmdPackage = colors.Blue,
 	texPgfType = colors.Yellow,
-}
-
-hl.lans.tsx = {
-	["@variable.tsx"] = hl.treesitter["@variable"],
-	["@variable.member.tsx"] = hl.treesitter["@variable.member"],
-	["@property.tsx"] = hl.treesitter["@property"],
-	["@function.method.tsx"] = hl.treesitter["@function.method"],
-}
-
-hl.langs.typescript = {
-	["@variable.typescript"] = hl.treesitter["@variable"],
-	["@variable.parameter.typescript"] = hl.treesitter["@variable.parameter"],
-	["@variable.member.typescript"] = hl.treesitter["@variable.parameter"],
-	["@property.typescript"] = hl.treesitter["@property"],
-	["@field.typescript"] = hl.treesitter["@field"],
-	["@function.call.typescript"] = hl.treesitter["@function.call"],
-	["@function.methodtypescript"] = hl.treesitter["@function.method"],
 }
 
 hl.langs.vim = {
