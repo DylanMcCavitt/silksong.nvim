@@ -865,7 +865,7 @@ hl.langs.javascript = {
 	["@property.javascript"] = hl.treesitter["@property"],
 	["@field.javascript"] = hl.treesitter["@field"],
 	["@function.call.javascript"] = hl.treesitter["@function.call"],
-	["@function.metho.call.javascript"] = hl.treesitter["@function.method.call"],
+	["@function.method.javascript"] = hl.treesitter["@function.method"],
 }
 
 hl.langs.markdown = {
@@ -949,7 +949,7 @@ hl.lans.tsx = {
 	["@variable.tsx"] = hl.treesitter["@variable"],
 	["@variable.member.tsx"] = hl.treesitter["@variable.member"],
 	["@property.tsx"] = hl.treesitter["@property"],
-	["@function.method.call.tsx"] = hl.treesitter["@function.method.call"],
+	["@function.method.tsx"] = hl.treesitter["@function.method"],
 }
 
 hl.langs.typescript = {
@@ -959,7 +959,7 @@ hl.langs.typescript = {
 	["@property.typescript"] = hl.treesitter["@property"],
 	["@field.typescript"] = hl.treesitter["@field"],
 	["@function.call.typescript"] = hl.treesitter["@function.call"],
-	["@function.metho.call.typescript"] = hl.treesitter["@function.method.call"],
+	["@function.methodtypescript"] = hl.treesitter["@function.method"],
 }
 
 hl.langs.vim = {
