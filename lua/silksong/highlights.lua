@@ -858,6 +858,16 @@ hl.langs.cpp = {
 	cppTSOperator = colors.Purple,
 }
 
+hl.langs.javascript = {
+	["@variable.javascript"] = hl.treesitter["@variable"],
+	["@variable.parameter.javascript"] = hl.treesitter["@variable.parameter"],
+	["@variable.member.javascript"] = hl.treesitter["@variable.parameter"],
+	["@property.javascript"] = hl.treesitter["@property"],
+	["@field.javascript"] = hl.treesitter["@field"],
+	["@function.call.javascript"] = hl.treesitter["@function.call"],
+	["@function.metho.call.javascript"] = hl.treesitter["@function.method.call"],
+}
+
 hl.langs.markdown = {
 	markdownBlockquote = colors.Grey,
 	markdownBold = { fg = c.none, fmt = "bold" },
@@ -933,6 +943,23 @@ hl.langs.tex = {
 	texCmdPart = colors.Blue,
 	texCmdPackage = colors.Blue,
 	texPgfType = colors.Yellow,
+}
+
+hl.lans.tsx = {
+	["@variable.tsx"] = hl.treesitter["@variable"],
+	["@variable.member.tsx"] = hl.treesitter["@variable.member"],
+	["@property.tsx"] = hl.treesitter["@property"],
+	["@function.method.call.tsx"] = hl.treesitter["@function.method.call"],
+}
+
+hl.langs.typescript = {
+	["@variable.typescript"] = hl.treesitter["@variable"],
+	["@variable.parameter.typescript"] = hl.treesitter["@variable.parameter"],
+	["@variable.member.typescript"] = hl.treesitter["@variable.parameter"],
+	["@property.typescript"] = hl.treesitter["@property"],
+	["@field.typescript"] = hl.treesitter["@field"],
+	["@function.call.typescript"] = hl.treesitter["@function.call"],
+	["@function.metho.call.typescript"] = hl.treesitter["@function.method.call"],
 }
 
 hl.langs.vim = {
