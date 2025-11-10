@@ -98,7 +98,7 @@ hl.common = {
 	iCursor = { fmt = "reverse" },
 	lCursor = { fmt = "reverse" },
 	CursorIM = { fmt = "reverse" },
-	CursorColumn = { bg = c.bg1 },
+	CursorColumn = { bg = c.bg0 },
 	CursorLine = { bg = c.bg_d },
 	ColorColumn = { bg = c.bg0 },
 	CursorLineNr = { fg = c.fg },
