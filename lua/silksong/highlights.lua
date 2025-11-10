@@ -167,7 +167,7 @@ hl.syntax = {
 	Type = colors.Yellow,
 	Structure = colors.Yellow,
 	StorageClass = colors.Yellow,
-	Identifier = { fg = c.green, fmt = cfg.code_style.variables },
+	Identifier = { fg = c.Red, fmt = "bold" },
 	Constant = { fg = c.yellow },
 	PreProc = colors.Purple,
 	PreCondit = colors.Purple,
@@ -249,9 +249,9 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
 		["@number.float"] = colors.Orange,
 		["@operator"] = colors.Purple,
 		["@parameter.reference"] = colors.Blue,
-		["@property"] = colors.Green,
-		["@punctuation.delimiter"] = colors.LightGrey,
-		["@punctuation.bracket"] = colors.LightGrey,
+		["@property"] = colors.Blue,
+		["@punctuation.delimiter"] = colors.Green,
+		["@punctuation.bracket"] = colors.Green,
 		["@string"] = { fg = c.yellow, fmt = cfg.code_style.strings },
 		["@string.regexp"] = { fg = c.orange, fmt = cfg.code_style.strings },
 		["@string.escape"] = { fg = c.red, fmt = cfg.code_style.strings },
@@ -263,9 +263,9 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
 		["@note"] = colors.Fg,
 		["@warning"] = colors.Fg,
 		["@danger"] = colors.Fg,
-		["@type"] = colors.Yellow,
-		["@type.builtin"] = colors.Orange,
-		["@variable"] = { fg = c.red, fmt = cfg.code_style.variables },
+		["@type"] = colors.Green,
+		["@type.builtin"] = colors.Purple,
+		["@variable"] = { fg = c.cyan, fmt = cfg.code_style.variables },
 		["@variable.builtin"] = { fg = c.cyan, fmt = cfg.code_style.variables },
 		["@variable.member"] = colors.Red,
 		["@variable.parameter"] = colors.Blue,
@@ -651,9 +651,9 @@ hl.plugins.coc = {
 }
 
 hl.plugins.whichkey = {
-	WhichKey = colors.Red,
+	WhichKey = { fg = c.cyan, fmt = "bold" },
 	WhichKeyDesc = colors.Blue,
-	WhichKeyGroup = colors.Orange,
+	WhichKeyGroup = { fg = c.red, fmt = "bold" },
 	WhichKeySeparator = colors.Green,
 }
 
@@ -763,9 +763,9 @@ hl.plugins.nvim_tree = {
 
 hl.plugins.telescope = {
 	TelescopeBorder = colors.Red,
-	TelescopePromptBorder = colors.Cyan,
-	TelescopeResultsBorder = colors.Cyan,
-	TelescopePreviewBorder = colors.Cyan,
+	TelescopePromptBorder = colors.Red,
+	TelescopeResultsBorder = colors.Red,
+	TelescopePreviewBorder = colors.Red,
 	TelescopeMatching = { fg = c.orange, fmt = "bold" },
 	TelescopePromptPrefix = colors.Green,
 	TelescopeSelection = { bg = c.bg0 },
