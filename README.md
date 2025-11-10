@@ -7,14 +7,17 @@
     <span> &nbsp;&nbsp;&nbsp; &nbsp; </span>
 </div></h4>
 
-**Dark and light** "Silksong (Hollow Knight)" inspired color themes for neovim forked from OneDark.nvim.
-_For Vim / Neovim < 0.5, prefer [joshdick/onedark.vim](https://github.com/joshdick/onedark.vim)_
+<sup>**_Disclaimer - I am not affiliated with \_Team Cherry_ or the _Hollow Knight_ series in anyway. This palette was just inspired by the colors/vibe from the games.\_**</sup>
+
+**Dark, warm and light(1)** themes for a **Silksong** (_Hollow Knight: Silksong_) inspired colorscheme for neovim forked from [navarasu/onedark.nvim](https://github.com/navarasu/onedark.nvim)
+
+_For Vim / Neovim < 0.5, prefer [joshdick/onedark.vim](https://github.com/navarasu/onedark.nvim)_
 
 _For latest [TreeSitter](https://github.com/nvim-treesitter/nvim-treesitter) syntax highlight, upgraded to Neovim 0.8.0 or later built with tree-sitter 0.20.3+_
 
 ### Features
 
-- 8 theme styles, 5 dark and one light variant.
+- 8 theme styles, 5 dark/warm and one light variant.
 - Supporting multiple plugins with hand picked proper colors
 - Customize `Colors`, `Highlights` and `Code style` of the theme as you like (Refer [Customization](#customization))
 - Toggle the theme style without exiting Neovim using `toggle_style_key` (Refer [Config](#default-configuration))
@@ -22,45 +25,46 @@ _For latest [TreeSitter](https://github.com/nvim-treesitter/nvim-treesitter) syn
 ## Themes
 
 <p float="left">
-<img width="412" alt="Silksong - marrow" src="https://user-images.githubusercontent.com/20145075/144289835-cbbbcb22-4eae-41f1-a5a3-e1800a37ae41.png">
-<img width="412" alt="Onedark - darker" src="https://user-images.githubusercontent.com/20145075/144293945-ee3b7dca-b119-4709-96d3-50391c7b8aba.png">
+<img width="412" alt="Silksong - marrow" src="">
+<img width="412" alt="silksong - slab" src="">
 </div></p>
 <p float="left">
-<img width="412" alt="Onedark - cool" src="https://user-images.githubusercontent.com/20145075/144298826-5c51eb3a-5529-4fe7-bce2-56508eda93d7.png">
-<img width="412" alt="Onedark - deep" src="https://user-images.githubusercontent.com/20145075/144299487-a7e886c7-2cc9-4d85-9aac-8517170432fc.png">
+<img width="412" alt="silksong - greymoor" src="">
 </div></p>
 <p float="left">
-<img width="412" alt="Onedark - warm" src="https://user-images.githubusercontent.com/20145075/144304677-abbf6cc1-4adc-48b4-b675-6f6a5a98b426.png">
-<img width="412" alt="Onedark - warmer" src="https://user-images.githubusercontent.com/20145075/144304700-1e333a12-6994-4fb2-9053-1e7f294d41a6.png">
-</div></p>
+<img width="412" alt="silksong - abyss" src="">
+<img width="412" alt="silksong - memorium" src="">
+<<img width="412" alt="silksong - cradle" src="">
+<img width="412" alt="silksong - weavenest" src="">
+/div></p>
 
 ## Installation
 
-Install via your favourite package manager
+Install via your favorite package manager
 
 ```lua
 -- Using Lazy
 {
-  "navarasu/onedark.nvim",
+  "dylanmccavitt/silksong.nvim",
   priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
-    require('onedark').setup {
-      style = 'darker'
+    require('silksong').setup {
+      style = 'marrow'
     }
     -- Enable theme
-    require('onedark').load()
+    require('silksong').load()
   end
 }
 ```
 
 ```vim
 " Using Vim-Plug
-Plug 'navarasu/onedark.nvim'
+Plug 'dylanmccavitt/silksong.nvim'
 ```
 
 ```lua
 -- Using Packer
-use 'navarasu/onedark.nvim'
+use 'dylanmccavitt/silksong.nvim'
 ```
 
 ## Configuration
@@ -69,41 +73,41 @@ use 'navarasu/onedark.nvim'
 
 ```lua
 -- Lua
-require('onedark').load()
+require('silksong').load()
 ```
 
 ```vim
 " Vim
-colorscheme onedark
+colorscheme silksong
 ```
 
 ### Change default style
 
 ```lua
 -- Lua
-require('onedark').setup {
-    style = 'darker'
+require('silksong').setup {
+    style = 'marrow'
 }
-require('onedark').load()
+require('silksong').load()
 ```
 
 ```vim
 " Vim
-let g:onedark_config = {
-    \ 'style': 'darker',
+let g:silksong_config = {
+    \ 'style': 'marrow',
 \}
 colorscheme onedark
 ```
 
-> **Options:** dark, darker, cool, deep, warm, warmer, light
+> **Options:** marrow(dark/warm), slab(darker), greymoor(cool), abyss(deep), memorium(warm), cradle(warmer), weavenest(light)
 
 ## Default Configuration
 
 ```lua
 -- Lua
-require('onedark').setup  {
+require('silksong').setup  {
     -- Main options --
-    style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    style = 'marrow', -- Default theme style. Choose between 'marrow(dark/warm), slab(darker), greymoor(cool), abyss(deep), memorium(warm), cradle(warmer), weavenest(light)
     transparent = false,  -- Show/hide background
     term_colors = true, -- Change terminal color as per the selected theme style
     ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
@@ -111,7 +115,7 @@ require('onedark').setup  {
 
     -- toggle theme style ---
     toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
-    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'}, -- List of styles to toggle between
+    toggle_style_list = {'marrow', 'slab', 'greymoor', 'abyss', 'memorium', 'cradle', 'weavenest'}, -- List of styles to toggle between
 
     -- Change code style ---
     -- Options are italic, bold, underline, none
@@ -144,22 +148,21 @@ require('onedark').setup  {
 
 ### Vimscript configuration
 
-Onedark can be configured also with Vimscript, using the global dictionary `g:onedark_config`.
+Silksong can be configured also with Vimscript, using the global dictionary `g:silksong_config`.
 **NOTE**: when setting boolean values use `v:true` and `v:false` instead of 0 and 1
 
 Example:
 
 ```vim
-let g:onedark_config = {
-  \ 'style': 'deep',
-  \ 'toggle_style_key': '<leader>ts',
+let g:silksong_config = {
+  \ 'style': 'marrow',
   \ 'ending_tildes': v:true,
   \ 'diagnostics': {
     \ 'darker': v:false,
     \ 'background': v:false,
   \ },
 \ }
-colorscheme onedark
+colorscheme silksong
 ```
 
 ## Customization
@@ -167,18 +170,18 @@ colorscheme onedark
 Example custom colors and Highlights config
 
 ```lua
-require('onedark').setup {
+require('silksong').setup {
   colors = {
     bright_orange = "#ff8800",    -- define a new color
     green = '#00ffaa',            -- redefine an existing color
   },
   highlights = {
-    ["@lsp.type.keyword"] = { fg = "$green" },
-    ["@lsp.type.property"] = {fg = '$bright_orange', bg = '#00ff00', fmt = 'bold'},
-    ["@lsp.type.function"] =  {fg = '#0000ff', sp = '$cyan', fmt = 'underline,italic'},
+    ["@keyword"] = { fg = "$green" },
+    ["@property"] = {fg = '$bright_orange', bg = '#00ff00', fmt = 'bold'},
+    ["@lsp.function"] =  {fg = '#0000ff', sp = '$cyan', fmt = 'underline,italic'},
     ["@lsp.type.method"] = { link = "@function" },
   -- To add language specific config
-    ["@lsp.type.variable.go"] = { fg = "none" },
+    ["@lsp.type.variable.javascript"] = { fg = "#ffffff" },
   }
 }
 ```
@@ -190,7 +193,7 @@ The old way before neovim 0.8 looks like this.
 For all keywords see [this](https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/highlights.lua#L133-L257) file from line 133 to 257
 
 ```lua
-require('onedark').setup {
+require('silksong').setup {
   colors = {
     bright_orange = "#ff8800",    -- define a new color
     green = '#00ffaa',            -- redefine an existing color
@@ -238,12 +241,14 @@ require('lualine').setup {
 - [Neotest](https://github.com/nvim-neotest/neotest)
 - [Barbecue](https://github.com/utilyre/barbecue.nvim)
 - [IndentBlankline](https://github.com/lukas-reineke/indent-blankline.nvim)
-- [vim-illuminate](https://github.com/RRethy/vim-illuminate)
+- [dashboard-nvim](https://github.com/nvimdev/dashboard-nvim)
+- Many more
 
 ## Reference
 
 - [tokyodark.nvim](https://github.com/tiagovla/tokyodark.nvim)
 - [one-dark-theme](https://github.com/andresmichel/one-dark-theme)
+- [bamboo.nvim](https://github.com/ribru17/bamboo.nvim?tab=readme-ov-file)
 
 ## Contributing
 
